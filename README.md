@@ -4,6 +4,6 @@ Rosetta addresses the needs of global typography. Together with our collaborator
 
 So far our retail library supports pan-European Latin, Arabic, Armenian, Greek, Cyrillic (besides Slavic languages we also support many Asian languages), Inuktitut, and Indic scripts like Gujarati and Devanagari. In total, the library covers more than 200 languages.
 
-Besides presenting the commercial libary on our website, we are sharing our open-source projects here on GitHub.
+Besides presenting proprietary work on our website, we are sharing our open-source fonts and tools on GitHub.
 
 [Rosetta website](http://rosettatype.com)
