@@ -94,6 +94,9 @@ p a {
 .secondary:hover {
   color: #FFF;
   background: #2A779F;
+} 
+.full {
+  width: 1000px;
 }
 .gray {
   color: #212121;
