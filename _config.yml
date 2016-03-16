@@ -26,3 +26,6 @@ articles:
   - title: repos
     link: http://github.com/rosettatype/repos
     description: Quick and dirty Python script to track multiple Git repositories and easily fetch updates
+  - title: post-production scripts
+    link: https://github.com/rosettatype/post-production-scripts
+    description: Some of our font post-production tools

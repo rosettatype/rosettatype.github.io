@@ -1,0 +1,1 @@
+Rosetta is a trademark of Rosetta Type Foundry s.r.o.
