@@ -20,9 +20,9 @@ articles:
   - title: Eczar
     link: http://github.com/rosettatype/eczar
     description: Latin + Devanagari type family with 5 weights
-  - title: Yrsa (ongoing)
-    link: http://github.rosettatype.com/yrsa
-    description: Latin + Gujarati type family with 5 weights
+  - title: Yrsa & Rasa
+    link: http://github.rosettatype.com/yrsa-rasa
+    description: Latin & Gujarati type families with 5 weights
   - title: repos
     link: http://github.com/rosettatype/repos
     description: Quick and dirty Python script to track multiple Git repositories and easily fetch updates
