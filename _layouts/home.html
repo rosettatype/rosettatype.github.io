@@ -18,14 +18,13 @@ home: true
 			<p>{{ article.description }}</p>
 			<a class="secondary" href="{{ article.link }}">Read more</a>
 		</div>
-
 		{% if forloop.index == 2 %}
 			</div>
 			<div class="divider"></div>
 			<div class="row">
 		{% endif %}
-
 	{% endfor %}
+	
 	</div>
 <div><!-- needs to be here for the templates to nest properly -->
 {% endif %}
