@@ -105,8 +105,32 @@ p a {
   display: none;
 }
 
-@media only screen and (min-width: 480px) and (max-width: 767px) {
-  p {
-    width: 100%;
-  }
+@media (max-width: 767px) {
+	body {
+		width: 100%;
+	}
+
+	.container {
+		width: 90%;
+		margin-left: 5%;
+		margin-right: 5%;
+	}
+
+	h3 {
+		font-size: 1em;
+	}
+
+	p {
+		width: 100%;
+	}
+
+	p > a.primary, p > a.secondary {
+		display: block;
+		margin: 10px;
+		width: auto;
+	}
+
+	img {
+		max-width: 100%;
+	}
 }
