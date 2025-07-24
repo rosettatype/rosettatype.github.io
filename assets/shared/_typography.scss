@@ -1,0 +1,363 @@
+// List of big fat items with lines between
+.highlight-list {
+    @extend .plain-list;
+    @extend .text-large-headline;
+    border-top: 1px solid var(--text);
+
+    li {
+        border-bottom: 1px solid var(--text);
+        min-height: 2em !important;
+        padding: 0.6em 0 0.4em;
+
+        &.disabled {
+            color: $disabled;
+        }
+
+        a {
+            @extend .title-link;
+            text-decoration: underline !important;
+            display: block;
+            margin: -0.6em 0 -0.4em;
+            padding: 0.6em 0 0.4em;
+
+            &:hover,
+            &:focus {
+                color: var(--interactive);
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+// List of starred things (awards)
+.star-list {
+    list-style: none;
+
+    li {
+        @extend .flex-center;
+        min-height: 2rem;
+        margin-bottom: 0.75rem;
+
+        &:last-of-type {
+            margin-bottom: 0;
+        }
+
+        &:before {
+            font-family: "rosetta-icons";
+            content: $font-rosetta-icons-star;
+            display: inline-block;
+            font-size: 1.25rem;
+            margin-right: 0.75rem;
+        }
+    }
+}
+
+.bullet-list-large {
+    @extend .plain-list;
+    @extend .text-medium-headline-display;
+    padding-left: 1rem;
+    list-style-type: disc;
+}
+
+p+.bullet-list,
+p+.link-list {
+    margin-top: 1rem;
+}
+
+
+@mixin underline($thickness: 4px, $color: inherit, $transitioncolor: var(--interactive), $offset: 0px) {
+    border: 0;
+    text-decoration: none;
+
+    &:after {
+        content: " ";
+        display: block;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -$offset;
+        height: $thickness;
+        background-color: $color;
+        // border-radius: $thickness/2;
+        transition: background-color 0.1s ease-out;
+    }
+
+    &:hover,
+    &:focus {
+        &:after {
+            background-color: $transitioncolor;
+        }
+    }
+}
+
+@mixin no-underline {
+    border: none;
+
+    &:after {
+        display: none;
+    }
+}
+
+// A label with line above in monospace
+.label-line {
+    @extend .text-label;
+    @include font-mono(600);
+
+    background: transparent !important;
+    border: none;
+    border-top: 1px solid var(--text);
+    border-radius: 0;
+    display: inline-block;
+    line-height: $ui-element-height;
+    min-height: $ui-element-height;
+}
+
+.label-line-interactive {
+    @extend .label-line;
+
+    border-top-color: var(--interactive);
+    color: var(--interactive);
+    text-decoration: underline;
+
+    &:hover,
+    &:focus {
+        border-top-color: var(--interactive);
+        color: var(--interactive);
+        text-decoration: underline;
+    }
+}
+
+// A button/label/link with line above in monospace, link looking
+.label-line-link {
+    @extend .label-line;
+
+    border-top-color: var(--interactive);
+    color: var(--interactive);
+    text-decoration: underline;
+
+    &:hover,
+    &:focus {
+        border-top-color: var(--interactive);
+        color: var(--interactive);
+        @include font-mono(750);
+    }
+}
+
+.read-more {
+    @include font-text(600);
+}
+
+/**
+ * Table with large cells and row borders, e.g. About us > Timeline
+ */
+// table.list
+.list {
+    @extend .text-caption-small;
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+
+    thead th,
+    thead td {
+        border: none !important;
+    }
+
+    tr:last-of-type td,
+    tr:last-of-type th {
+        border-bottom: 1px solid var(--text);
+    }
+
+    th,
+    td {
+        border-top: 1px solid var(--text);
+        margin: 0;
+        @include space-vertical(0.25, 0.25, "padding");
+        padding-right: $gutter;
+
+        &:last-child {
+            @include space-right(1);
+        }
+    }
+
+    th,
+    .strong {
+        @extend .text-medium-headline;
+    }
+
+    th {
+        font-feature-settings: "tnum" 1;
+    }
+
+    a {
+        display: block;
+    }
+
+    tr.hidden {
+        display: none;
+    }
+
+    tr.filtered {
+        display: none;
+    }
+}
+
+/**
+ * Table with rows of checkmarks
+ */
+table.checkmark-table {
+    @extend .list;
+
+    tr {
+        td:nth-child(1) {
+            @extend .text-medium-headline;
+            text-align: left;
+
+            @include mobile {
+                font-size: 18px;
+                line-height: 24px;
+                -webkit-hyphens: auto;
+                hyphens: auto;
+            }
+        }
+
+        th,
+        td {
+            text-align: center;
+        }
+    }
+
+    thead tr th,
+    thead tr td {
+        border-top: 0;
+    }
+
+    tbody tr td:nth-child(n+2) i {
+        font-family: "rosetta-icons", "Adapter Mono VF", monospace;
+        font-size: 32px;
+        font-style: normal;
+        position: relative;
+        top: 4px;
+
+        @include tablet {
+            font-size: 24px;
+        }
+
+        @include mobile {
+            font-size: 18px;
+        }
+    }
+
+    @include tablet {
+        width: calc(100% + 24px);
+
+        th,
+        td {
+            padding-right: 6px;
+        }
+    }
+}
+
+.no-word-break {
+    white-space: pre;
+}
+
+.text-paragraphs {
+    max-width: 45rem;
+
+    *+p {
+        margin-top: 1em;
+    }
+}
+
+nav.quicklinks {
+    margin-bottom: 2rem;
+    margin-top: -2rem;
+
+    @include mobile {
+        margin-top: 0;
+    }
+
+    ul {
+        @extend .plain-list;
+
+        li.current a {
+            @include font-mono(600);
+        }
+    }
+
+    a {
+        @extend .label-link;
+    }
+}
+
+.tags-list {
+    @extend .plain-list;
+    display: flex;
+    flex-wrap: wrap;
+    line-height: 1;
+
+    >* {
+        margin-right: 10px;
+        margin-bottom: 10px !important;
+    }
+}
+
+.tag {
+    @extend .button-small-round;
+
+    border-color: var(--border);
+    display: inline-block;
+
+    +.tag {
+        margin-left: 0;
+    }
+
+    &.unclickable {
+        cursor: default !important;
+        color: var(--text);
+
+        &:hover,
+        &:focus {
+            background: var(--background);
+            border-color: var(--border);
+            color: var(--text);
+        }
+    }
+
+    &.disabled {
+        cursor: not-allowed !important;
+        color: var(--disbaled) !important;
+        border-color: var(--disbaled) !important;
+    }
+}
+
+label.radio-tag {
+    cursor: pointer;
+    white-space: pre;
+
+    input[type=radio] {
+        appearance: none;
+        width: 0;
+        overflow: hidden;
+    }
+
+    span {
+        // @extend .button-small-round;
+        // white-space: pre;
+        // border-color: var(--disabled);
+        @extend .tag;
+    }
+
+    &:hover,
+    &:focus {
+        border-color: var(--interactive);
+    }
+
+    &:has(input[type=radio]:checked) {
+        span {
+            border-color: var(--text) !important;
+            background: var(--text) !important;
+            color: var(--background) !important;
+        }
+    }
+}

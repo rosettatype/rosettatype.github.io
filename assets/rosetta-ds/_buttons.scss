@@ -1,0 +1,226 @@
+// Helper to make a button without any styling
+%no-button {
+    font-size: initial;
+    font-weight: initial;
+    line-height: initial;
+    border: none;
+    border-radius: 0;
+    padding: initial;
+    color: inherit;
+    background: inherit;
+    margin: initial;
+    white-space: normal;
+    text-decoration: none;
+}
+
+.button,
+button,
+input[type=submit],
+input[type=reset] {
+    @extend .text-label;
+    @include font-mono(800);
+    text-transform: uppercase;
+    user-select: none;
+
+    color: $interactive;
+    background: transparent;
+    text-decoration: none;
+    border: 2px solid $interactive;
+    outline: none;
+
+    padding: 0 20px;
+    height: $ui-button-height + 2px;
+    line-height: $ui-button-height;
+
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none !important;
+    border-radius: 2px;
+    transition: $transition;
+    text-align: center;
+
+    user-select: none;
+
+    // Never line-break buttons
+    white-space: pre;
+
+    &:hover,
+    &:focus {
+        background: var(--interactive);
+        border-color: var(--interactive);
+        color: $background;
+    }
+
+    &:active {
+        opacity: 0.75;
+    }
+
+    &[disabled],
+    .disabled {
+        cursor: not-allowed;
+        opacity: 0.25;
+    }
+
+    // Spacing to other buttons, not sure how useful this is like this
+
+    &+button,
+    &+.button {
+        margin-left: $ui-space;
+
+        @include mobile {
+            margin-left: $ui-space * 0.5;
+        }
+    }
+
+    &.large,
+    &.button-large {
+        @include mobile-and-up {
+            padding: 0 48px;
+            height: $ui-button-height-large + 2px;
+            line-height: $ui-button-height-large;
+        }
+    }
+
+    &.negative,
+    &.button-negative {
+        border-color: var(--background);
+        color: var(--background);
+
+        &:hover,
+        &:focus {
+            background: var(--background);
+            border-color: var(--background);
+            color: var(--interactive);
+        }
+    }
+
+    &.cta {
+        background: var(--interactive);
+        color: var(--background);
+    }
+
+    &.filled,
+    &.button-filled {
+        background: var(--interactive);
+        color: var(--background);
+        border-color: var(--interactive);
+    }
+
+    // Address a particular icon/arrow offset
+    i.arrow {
+        font-style: inherit;
+        position: relative;
+        top: -0.075em;
+    }
+
+    [dir=rtl] {
+
+        &+button,
+        &+.button {
+            margin-left: initial;
+            margin-right: $ui-space;
+        }
+    }
+}
+
+.button-small-round {
+    @extend button;
+
+    height: $ui-button-height-small;
+    line-height: $ui-button-height-small;
+    border-radius: $ui-button-height-small*0.5;
+    border-width: 1px;
+    text-transform: none;
+    padding: 0 8px;
+
+    @include font-mono(600);
+    font-size: 12px;
+    line-height: 24px;
+}
+
+input[type=submit],
+input[type=reset] {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+// A reset for anything button that should not get any styling
+.button-unstyled {
+    @extend %no-button;
+
+    display: inline-block;
+    min-width: 0;
+    width: auto;
+    max-width: none;
+}
+
+@mixin button-small {
+    padding: 0 24px;
+    height: $ui-button-height-small + 2px;
+    line-height: $ui-button-height-small;
+}
+
+.button-small {
+    @include button-small;
+}
+
+// General purpose transparent button with top border
+.button-minimal {
+    @extend .button;
+    @include font-mono(600);
+    text-transform: none;
+
+    border: 0;
+    border-top: 1px solid $interactive;
+    background: transparent !important;
+    border-radius: 0;
+    line-height: $ui-element-height;
+    height: $ui-element-height;
+    padding-left: 0;
+    padding-right: 0;
+
+    &:hover,
+    &:focus {
+        @include font-mono(750);
+        border-top-color: $interactive;
+        color: $interactive;
+        text-decoration: underline !important;
+    }
+}
+
+.button-minimal-link {
+    @extend .button-minimal;
+
+    text-decoration: underline !important;
+}
+
+.square-icon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border-radius: 2px;
+    text-align: center;
+    line-height: 16px;
+    font-size: 14px;
+    background: var(--interactive);
+    color: var(--background);
+}
+
+// A set of BABs in a container; mostly for better mobile styling
+.button-set {
+    @include space-top(0.5, "margin-top");
+
+    button,
+    .button,
+    .button-large {
+        margin-left: 0 !important;
+        @include space-right(0.5, "margin-right");
+        @include space-top(0.5, "margin-top");
+    }
+
+    @include tablet {
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}

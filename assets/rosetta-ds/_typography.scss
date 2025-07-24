@@ -1,0 +1,478 @@
+///////////////////////////////////////////////////////////////////////////////
+// Base typography mixins
+///////////////////////////////////////////////////////////////////////////////
+@mixin text-body {
+    @include font-text();
+    font-size: 20px;
+    line-height: 32px;
+
+    @include mobile {
+        font-size: 18px;
+        line-height: 28px;
+    }
+}
+
+@mixin text-body-smaller {
+    @include font-text();
+    font-size: 16px;
+    line-height: 28px;
+}
+
+// The _truly_ largest headline size, for short worded page intros
+@mixin text-extra-large-headline {
+    @include font-display(900);
+    font-size: 53px;
+    line-height: 61px;
+
+    @include mobile {
+        font-size: 42px;
+        line-height: 48px;
+        -webkit-hyphens: none;
+        hyphens: none;
+    }
+}
+
+// The very large headline size, for paragraph intros
+@mixin text-largest-headline {
+    @include font-display(900);
+    font-size: 42px;
+    line-height: 48px;
+
+    @include mobile {
+        font-size: 24px;
+        line-height: 32px;
+        -webkit-hyphens: none;
+        hyphens: none;
+    }
+}
+
+// The in-page large headlines, smaller than the intros
+@mixin text-large-headline {
+    @include font-display(800);
+    font-size: 32px;
+    line-height: 38.4px;
+
+    @include mobile {
+        font-size: 24px;
+        line-height: 32px;
+        -webkit-hyphens: none;
+        hyphens: none;
+    }
+}
+
+@mixin text-inherit {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Reusable typography text types
+///////////////////////////////////////////////////////////////////////////////
+
+.text-body {
+    @include text-body;
+}
+
+.text-body-bold {
+    @include font-text(700);
+    font-size: 20px;
+    line-height: 32px;
+}
+
+.text-body-smaller {
+    @include text-body-smaller;
+}
+
+.text-body-smaller-bold {
+    @include font-text(700);
+    font-size: 16px;
+    line-height: 28px;
+}
+
+.text-small-description {
+    @include font-text(500);
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.bold {
+    @include font-text(700);
+}
+
+small,
+.small,
+.text-small {
+    @include font-text(600);
+    font-size: 12px;
+    line-height: 21px;
+}
+
+.text-caption,
+.text-label {
+    @include font-mono();
+    font-size: 12px;
+    line-height: 24px;
+}
+
+.text-caption-bold {
+    @include font-mono(600);
+    font-size: 12px;
+    line-height: 24px;
+
+    a {
+
+        &:hover,
+        &:focus {
+            @include font-mono(750);
+        }
+    }
+}
+
+.text-caption-headline {
+    @include font-mono(800);
+    font-size: 13px;
+    line-height: 24px;
+}
+
+.text-caption-headline-italic {
+    @include font-mono(800, true);
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.text-label-strong {
+    @include font-mono();
+    font-size: 12px;
+    line-height: 24px;
+}
+
+.text-caption-small,
+.text-label-small {
+    @extend .text-caption;
+    @include font-mono(600);
+}
+
+.text-extra-large-headline {
+    @include text-extra-large-headline;
+}
+
+.text-largest-headline {
+    @include text-largest-headline;
+}
+
+.text-large-headline {
+    @include text-large-headline;
+}
+
+// Smallish headlines
+.text-medium-headline-display {
+    @include font-display(800);
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: 0;
+}
+
+// Basic in-text headlines
+.text-medium-headline {
+    @include font-text(800);
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: 0;
+}
+
+// Small bold headlines
+.text-small-headline {
+    @include font-display(700);
+    font-size: 20px;
+    line-height: 32px;
+    letter-spacing: 0;
+}
+
+.text-tiny-headline {
+    @include font-text(800);
+    font-size: 12px;
+    line-height: 21px;
+}
+
+.text-max-width {
+    max-width: $text-max-width;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Default typography
+///////////////////////////////////////////////////////////////////////////////
+
+html {
+    @include text-body;
+    font-optical-sizing: none; // we set this manually via font-variation-settings
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    // DO NOT USE THIS, for Safari this will overwrite opsz (WTF)
+    // text-rendering: optimizeLegibility;
+}
+
+
+h1,
+.h1 {
+    @include text-largest-headline;
+}
+
+h2,
+.h2 {
+    @extend .text-medium-headline;
+}
+
+h3,
+h4,
+h5,
+h6 {
+    @extend .text-tiny-headline;
+}
+
+p+h1,
+p+h2,
+p+h3,
+p+h4,
+p+h5,
+p+h6 {
+    margin-top: 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-bottom: 2rem;
+
+    +.button {
+        margin-top: rem;
+    }
+}
+
+strong,
+.strong {
+    @include font-text(700);
+}
+
+blockquote {
+    // No other styling
+    margin-top: 1.75rem;
+    margin-bottom: 1.75rem;
+
+    +figcaption {
+        &:before {
+            content: "—";
+            display: inline-block;
+            margin-right: 0.25em;
+        }
+
+        @extend .text-body-bold;
+        margin-top: -1.25rem;
+        margin-bottom: 1.75rem;
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+    }
+}
+
+sup {
+    all: unset;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Footnotes
+///////////////////////////////////////////////////////////////////////////////
+
+// A sup marker for a footnote
+.footnote-marker {
+    @include font-mono(450);
+    font-size: 1em;
+    letter-spacing: 0;
+    line-height: 1;
+    counter-increment: markers;
+    content: counter(markers);
+    line-height: inherit !important;
+    position: relative;
+    top: -0.2em;
+    font-feature-settings: "ss11" 1;
+    display: inline-block;
+    padding: 0.05em 0 0.05em;
+    margin: 0 0.3em;
+    text-decoration: none;
+}
+
+.footnote-anchor {
+    @include font-mono();
+    display: inline-block;
+    font-feature-settings: "ss12" 1;
+    text-decoration: none;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Links
+///////////////////////////////////////////////////////////////////////////////
+
+a {
+    color: $interactive;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.body-link {
+    @include font-text(600);
+    text-decoration: underline;
+}
+
+.title-link {
+    // Set font otherwise, but determined shared interaction
+    text-decoration: none;
+    color: $interactive;
+    transition: $transition;
+
+    &:hover {
+        color: $text;
+    }
+}
+
+.link-arrow-left {
+    // @extend .text-label;
+    @extend .text-label-small;
+    position: relative;
+    padding-left: 1.75em;
+
+    &:hover {
+        @include font-mono(750);
+    }
+
+    &:before {
+        font-family: "rosetta-icons";
+        content: $font-rosetta-icons-arrow-left;
+        position: absolute;
+        left: 0;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 0.9rem;
+        top: -0.3rem;
+    }
+}
+
+.link-scroll-down {
+    @extend .text-caption-small;
+    margin-right: 1.25rem;
+
+    &:hover,
+    &:focus {
+        @include font-mono(750);
+    }
+
+    &:after {
+        font-family: "rosetta-icons";
+        content: $font-rosetta-icons-arrow-full-down;
+        position: absolute;
+        right: -1rem;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 0.85rem;
+        top: 0;
+    }
+}
+
+// A link in monospace
+.label-link {
+    @extend a;
+    @extend .text-label;
+    @include font-mono(600);
+    background: transparent;
+
+    &:hover,
+    &:focus {
+        @include font-mono(750);
+    }
+}
+
+// A blue tag like table, e.g. "new" label
+.tag-label {
+    @include font-mono(800);
+    line-height: 1.85;
+    text-transform: uppercase;
+    padding: 0.15em 0.75em 0;
+    background: $interactive;
+    color: $background;
+    border-radius: 2px;
+    letter-spacing: 0.1em;
+    display: inline-block;
+    font-size: 10px;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Default list types
+///////////////////////////////////////////////////////////////////////////////
+
+// An "unstyled" list
+.plain-list {
+    list-style: none;
+    padding: 0;
+}
+
+// Unstyled list without line breaks
+.inline-list {
+    @extend .plain-list;
+
+    li {
+        display: inline-block;
+    }
+}
+
+// Basic list with prepended hyphens
+.hyphen-list {
+    list-style: none;
+
+    li {
+        &:before {
+            content: "—";
+            margin-right: 0.5rem;
+        }
+    }
+}
+
+// Basic list with prepended hyphens
+.bullet-list {
+    list-style: disc;
+    margin-left: 1em;
+}
+
+// A list of "body-links"
+.link-list {
+    @extend .plain-list;
+    @extend .body-link;
+}
+
+.menu-list {
+    @include font-display(900);
+    @extend .plain-list;
+    line-height: 1.25;
+    letter-spacing: 0.01em;
+    font-size: 38px;
+
+    @include tablet-and-up {
+        font-size: 48px;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Breaks and rules/lines
+///////////////////////////////////////////////////////////////////////////////
+
+// Any element with a line break after
+.br {
+    margin-bottom: 1rem;
+}
+
+.br-l {
+    margin-bottom: 2rem;
+}

@@ -1,0 +1,41 @@
+---
+---
+
+@import "themes";
+@import "rosetta-ds/rosetta-ds";
+@import "shared/_shared";
+@import "nav";
+
+
+.divider {
+  width: 100%;
+  background: #CCC;
+  height: 1px;
+  margin: 25px 0;
+}
+
+section {
+  margin-top: 6rem;
+}
+
+h2 {
+  margin-bottom: 0rem;
+}
+
+.button {
+  margin-top: 1rem;
+}
+
+footer {
+  margin-top: 144px;
+}
+footer::before {
+  content: " ";
+  clear: both;
+  display: block;
+  margin-top: 72px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--text);
+  width: 100%;
+  max-width: 80rem;
+}

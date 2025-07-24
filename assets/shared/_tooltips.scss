@@ -1,0 +1,62 @@
+/**
+ * Styling tippy js tooltips with DOM structure:
+
+<div data-tippy-root>
+  <div class="tippy-box" data-placement="top">
+    <div class="tippy-content">
+      My content
+    </div>
+  </div>
+</div>
+
+ */
+
+
+.tippy-box[data-theme=tooltip] {
+    max-width: 30rem !important;
+}
+
+.tippy-box[data-theme=tooltip],
+.tippy-box[data-theme=tooltip-opentype] {
+    .tippy-content {
+        @extend .text-label;
+        @include font-mono(600);
+        background: var(--text);
+        color: var(--background);
+        border-radius: $border-radius;
+        padding: 0.6em 1.5em 0.4em;
+    }
+
+    .tippy-arrow {
+        &:before {
+            border: 0;
+            width: 11px;
+            height: 11px;
+            background: var(--text);
+            border-radius: 0 0 3px 0;
+            transform: rotate(45deg) translateY(-4px) translateX(4px);
+        }
+    }
+}
+
+
+// Floating portrait image
+.tippy-box[data-theme=portrait] {
+    background: transparent;
+
+    .tippy-content {
+        @extend .text-label;
+        @include font-mono(600);
+        background: transparent;
+        padding: 0;
+
+        img {
+            display: block;
+            width: 25vw;
+            max-width: 250px;
+            height: auto;
+            margin: 0;
+            border-radius: $border-radius-large;
+        }
+    }
+}

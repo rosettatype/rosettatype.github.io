@@ -1,0 +1,61 @@
+.feature-highlight {
+
+    // In a element with FeatureParser output, highlight specific markup:
+
+    color: $disabled-text;
+    font-feature-settings: "liga" 0, "rlig" 0, "rclt" 0;
+
+    em {
+        color: $text;
+    }
+
+    i {
+        font-style: normal;
+    }
+
+    &.disabled {
+        // The the feature being disabled is one of the "implicitly" active
+        // features we want to explicitly deactivate it by inheriting the
+        // default "everything off" state from above.
+        em[data-feature*='liga'],
+        em[data-feature*='rlig'],
+        em[data-feature*='rclt'],
+        em[data-feature*='dlig'] {
+            font-feature-settings: inherit !important;
+        }
+
+        // For other feature tags activate the implicitly active features
+        // when off. Why is this needed? When e.g. "ss01" 1 is turned on this
+        // overwrites the explicitly turned-off state of implicit features,
+        // thus turning them off in the on state: the off state should match
+        // this by also showing the implicit features instead of inheriting the
+        // "everything off" state from above.
+        em {
+            font-feature-settings: "liga" 1, "rlig" 1, "rclt" 1 !important;
+        }
+
+        // When disabling a <locl> inside a language tag, e.g.
+        // <nl>m<locl>ij</locl>n</nl>
+        // we want to specifically overwrite the locl of the nested element,
+        // where the above "inherit" would not do the trick, because that would
+        // ignore locl and apply the outer language.
+        // (In rate edge cases this might result in other font-feature-settings
+        // _not_ being turned off, but then again this is syntax is 
+        // specifically for showing turned off locl)
+        [style*=locl] {
+            font-feature-settings: "locl" 0 !important;
+        }
+    }
+
+
+    // To ignore default highlights and only highlight em.highlight bits:
+    &.explicit-highlight {
+        em {
+            color: inherit;
+        }
+
+        em.highlight {
+            color: $text;
+        }
+    }
+}

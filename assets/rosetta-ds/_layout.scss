@@ -1,0 +1,361 @@
+///////////////////////////////////////////////////////////////////////////////
+// Layout mixins
+///////////////////////////////////////////////////////////////////////////////
+
+@mixin columns {
+    // @include space-horizontal(-0.25, -0.25, "margin");
+    margin-left: -$gutter * 0.5;
+    margin-right: -$gutter * 0.5;
+    display: flex;
+    align-items: flex-start;
+
+    >* {
+        // @include space-horizontal(0.25, 0.25, "padding");
+        padding-left: $gutter * 0.5;
+        padding-right: $gutter * 0.5;
+        flex-grow: 1;
+
+        &.width-2-3 {
+            flex-basis: calc(100% / 3 * 2);
+            width: calc(100% / 3 * 2);
+        }
+    }
+}
+
+@mixin margin-right($i) {
+    margin-right: calc(100% / 24 * #{$i});
+}
+
+@mixin margin-left($i) {
+    margin-left: calc(100% / 24 * #{$i});
+}
+
+@mixin padding-right($i) {
+    padding-right: calc(100% / 24 * #{$i});
+}
+
+@mixin padding-left($i) {
+    padding-left: calc(100% / 24 * #{$i});
+}
+
+@mixin cols($i) {
+    // @include space-horizontal(0.25, 0.25, "padding");
+    padding-left: $gutter * 0.5 !important;
+    padding-right: $gutter * 0.5 !important;
+    width: calc(100% / 24 * #{$i});
+    flex-grow: 0;
+}
+
+@mixin offset($i) {
+    @include space-horizontal(0.25, 0.25, "margin");
+    position: relative;
+    left: calc(100% / 24 * #{$i});
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// General cascading layout classes
+///////////////////////////////////////////////////////////////////////////////
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    position: relative;
+    margin: 0;
+}
+
+hr {
+    border: 0;
+    border-top: $border;
+    background: none;
+    max-width: 40rem;
+    margin: 3rem 0;
+}
+
+html {
+    scroll-behavior: smooth;
+    @include styled-scrollbar();
+}
+
+body {
+    @include space(2, 1, "padding");
+    overflow-x: hidden;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+
+body>main {
+    @include space-vertical(1.5, 1.5, "padding");
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Flex box shortcuts
+///////////////////////////////////////////////////////////////////////////////
+
+.flex-start {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.flex-end {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.flex-space {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flex-top {
+    display: flex;
+    align-items: flex-start;
+}
+
+.flex-bottom {
+    display: flex;
+    align-items: flex-end;
+}
+
+.flex-center {
+    display: flex;
+    align-items: center;
+}
+
+.flex-baseline {
+    display: flex;
+    align-items: baseline;
+}
+
+.flex-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Layout shortcuts
+///////////////////////////////////////////////////////////////////////////////
+
+.display-block {
+    display: block;
+}
+
+.display-inline {
+    display: inline;
+}
+
+.display-inline-block {
+    display: inline-block;
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Mobile/Desktop toggles
+///////////////////////////////////////////////////////////////////////////////
+
+.hide-on-mobile {
+    @include mobile {
+        display: none;
+    }
+}
+
+.show-on-mobile {
+    display: none;
+
+    @include mobile {
+        display: inline-block;
+    }
+}
+
+.hide-on-tablet {
+    @include tablet {
+        display: none;
+    }
+}
+
+.show-on-tablet {
+    display: none;
+
+    @include tablet {
+        display: inline-block;
+    }
+}
+
+.hide-on-handheld {
+    @include handheld {
+        display: none;
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Color mode toggles
+///////////////////////////////////////////////////////////////////////////////
+
+.theme-light {
+    .show-on-light-mode {
+        display: initial;
+    }
+
+    .hide-on-light-mode {
+        display: none;
+    }
+}
+
+.theme-dark {
+    .show-on-dark-mode {
+        display: initial;
+    }
+
+    .hide-on-dark-mode {
+        display: none;
+    }
+}
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Columns and offsets
+///////////////////////////////////////////////////////////////////////////////
+
+.columns {
+    @include columns;
+}
+
+
+@for $i from 1 to 25 {
+    .cols-#{$i} {
+        @include cols($i);
+    }
+
+    .offset-#{$i} {
+        @include offset($i);
+    }
+
+    .margin-right-#{$i} {
+        @include margin-right($i);
+    }
+
+    .margin-left-#{$i} {
+        @include margin-left($i);
+    }
+
+    .padding-right-#{$i} {
+        @include padding-right($i);
+    }
+
+    .padding-left-#{$i} {
+        @include padding-left($i);
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// General layout classes
+///////////////////////////////////////////////////////////////////////////////
+
+// General content section spacing below
+.section {
+    @include space-bottom(2, "margin-bottom");
+
+    @include tablet {
+        @include space-bottom(4, "margin-bottom");
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    // Make sure a one and only .section retains margin bottom
+    &:first-of-type {
+        @include space-bottom(2, "margin-bottom");
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Video wrappers with responsive aspect ratios
+///////////////////////////////////////////////////////////////////////////////
+
+.responsive-video-wrapper-1-1 {
+    padding-top: 100%;
+}
+
+.responsive-video-wrapper-2-1 {
+    padding-top: calc(1/2*100%);
+}
+
+.responsive-video-wrapper-3-1 {
+    padding-top: calc(1/3*100%);
+}
+
+.responsive-video-wrapper-16-9 {
+    padding-top: calc(9/16*100%);
+}
+
+.responsive-video-wrapper-1-1,
+.responsive-video-wrapper-2-1,
+.responsive-video-wrapper-3-1,
+.responsive-video-wrapper-16-9 {
+    position: relative;
+    display: block;
+
+    img,
+    video {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: auto;
+    }
+}
+
+.media-wrapper {
+    max-width: 1185px;
+    border: 1px solid var(--text);
+    border-radius: $border-radius-large;
+    overflow: hidden;
+    box-sizing: border-box;
+    margin: 1px;
+
+    img,
+    video {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Small notification bubbles (parent needs position:relative!)
+///////////////////////////////////////////////////////////////////////////////
+.bubble-notice {
+    display: none;
+
+    @extend small;
+    position: absolute;
+    left: 50%;
+    top: -0.5rem;
+    transform: translate(-50%, -100%);
+    background: var(--text);
+    color: var(--background);
+    border-radius: 4px;
+    padding: 0.25rem 0.5rem;
+    min-width: 10rem;
+    max-width: #{"min(90vw, 25rem)"};
+    text-align: center;
+    transition: opacity 0.2s ease-out;
+    pointer-events: none;
+    opacity: 0;
+    text-transform: none;
+
+    &.fade-in {
+        opacity: 1;
+    }
+
+    &.fade-out {
+        opacity: 0;
+    }
+}

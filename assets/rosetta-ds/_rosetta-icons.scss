@@ -1,0 +1,116 @@
+//
+// Icon Font: rosetta-icons
+//
+
+@font-face {
+  font-family: "rosetta-icons";
+  src: url("#{$icon-font-path}/rosetta-icons_4edff33ffad9271470216f266992106b.eot");
+  src: url("#{$icon-font-path}/rosetta-icons_4edff33ffad9271470216f266992106b.eot?#iefix") format("embedded-opentype"),
+       url("#{$icon-font-path}/rosetta-icons_4edff33ffad9271470216f266992106b.woff2") format("woff2"),
+       url("#{$icon-font-path}/rosetta-icons_4edff33ffad9271470216f266992106b.woff") format("woff"),
+       url("#{$icon-font-path}/rosetta-icons_4edff33ffad9271470216f266992106b.ttf") format("truetype"),
+       url("#{$icon-font-path}/rosetta-icons_4edff33ffad9271470216f266992106b.svg#rosetta-icons") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: "rosetta-icons";
+    src: url("#{$icon-font-path}/rosetta-icons_4edff33ffad9271470216f266992106b.svg#rosetta-icons") format("svg");
+  }
+}
+
+[data-icon]:before { content: attr(data-icon); }
+
+[data-icon]:before,
+.icon-arrow-close:before,
+.icon-arrow-down:before,
+.icon-arrow-full-down:before,
+.icon-arrow-full-left:before,
+.icon-arrow-full-right:before,
+.icon-arrow-full-up:before,
+.icon-arrow-left:before,
+.icon-arrow-right:before,
+.icon-arrow-top:before,
+.icon-checkmark:before,
+.icon-checkmark-circled:before,
+.icon-checkmark-semi:before,
+.icon-checkmark-small-circled-off:before,
+.icon-checkmark-small-circled-on:before,
+.icon-checkmark-small-circled-x:before,
+.icon-checkmark-small-filled-off:before,
+.icon-checkmark-small-filled-on:before,
+.icon-checkmark-small-filled-x:before,
+.icon-close:before,
+.icon-elephantino:before,
+.icon-expand-minus:before,
+.icon-expand-plus:before,
+.icon-menu:before,
+.icon-star:before,
+.icon-theme:before {
+  display: inline-block;
+  font-family: "rosetta-icons";
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  line-height: 1;
+  text-decoration: inherit;
+  text-rendering: optimizeLegibility;
+  text-transform: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
+.icon-arrow-close:before { content: "\f10f"; }
+.icon-arrow-down:before { content: "\f102"; }
+.icon-arrow-full-down:before { content: "\f116"; }
+.icon-arrow-full-left:before { content: "\f117"; }
+.icon-arrow-full-right:before { content: "\f118"; }
+.icon-arrow-full-up:before { content: "\f119"; }
+.icon-arrow-left:before { content: "\f100"; }
+.icon-arrow-right:before { content: "\f103"; }
+.icon-arrow-top:before { content: "\f104"; }
+.icon-checkmark:before { content: "\f109"; }
+.icon-checkmark-circled:before { content: "\f111"; }
+.icon-checkmark-semi:before { content: "\f110"; }
+.icon-checkmark-small-circled-off:before { content: "\f112"; }
+.icon-checkmark-small-circled-on:before { content: "\f113"; }
+.icon-checkmark-small-circled-x:before { content: "\f11a"; }
+.icon-checkmark-small-filled-off:before { content: "\f114"; }
+.icon-checkmark-small-filled-on:before { content: "\f115"; }
+.icon-checkmark-small-filled-x:before { content: "\f11b"; }
+.icon-close:before { content: "\f108"; }
+.icon-elephantino:before { content: "\f11c"; }
+.icon-expand-minus:before { content: "\f11f"; }
+.icon-expand-plus:before { content: "\f11e"; }
+.icon-menu:before { content: "\f101"; }
+.icon-star:before { content: "\f107"; }
+.icon-theme:before { content: "\f105"; }
+
+$font-rosetta-icons-arrow-close: "\f10f";
+$font-rosetta-icons-arrow-down: "\f102";
+$font-rosetta-icons-arrow-full-down: "\f116";
+$font-rosetta-icons-arrow-full-left: "\f117";
+$font-rosetta-icons-arrow-full-right: "\f118";
+$font-rosetta-icons-arrow-full-up: "\f119";
+$font-rosetta-icons-arrow-left: "\f100";
+$font-rosetta-icons-arrow-right: "\f103";
+$font-rosetta-icons-arrow-top: "\f104";
+$font-rosetta-icons-checkmark: "\f109";
+$font-rosetta-icons-checkmark-circled: "\f111";
+$font-rosetta-icons-checkmark-semi: "\f110";
+$font-rosetta-icons-checkmark-small-circled-off: "\f112";
+$font-rosetta-icons-checkmark-small-circled-on: "\f113";
+$font-rosetta-icons-checkmark-small-circled-x: "\f11a";
+$font-rosetta-icons-checkmark-small-filled-off: "\f114";
+$font-rosetta-icons-checkmark-small-filled-on: "\f115";
+$font-rosetta-icons-checkmark-small-filled-x: "\f11b";
+$font-rosetta-icons-close: "\f108";
+$font-rosetta-icons-elephantino: "\f11c";
+$font-rosetta-icons-expand-minus: "\f11f";
+$font-rosetta-icons-expand-plus: "\f11e";
+$font-rosetta-icons-menu: "\f101";
+$font-rosetta-icons-star: "\f107";
+$font-rosetta-icons-theme: "\f105";

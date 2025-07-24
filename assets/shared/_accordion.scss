@@ -1,0 +1,152 @@
+/**
+ * Reusable accordion component with structure:
+ *
+ * .accordion
+ *      <section>
+ *          <header>
+ *              <h1> (automatically has the +/- icon appended)
+ *          <main>
+ *              *any content*
+ */
+
+%expand-icon {
+    @extend .square-icon;
+
+    font-family: "rosetta-icons";
+    content: $font-rosetta-icons-expand-plus;
+    display: inline-block;
+    margin-left: 0.75em;
+    top: -3px; // Make it sit nicely on the same baselike as an h1
+    position: relative;
+    font-size: 12px;
+}
+
+.accordion {
+
+    >section>header {
+
+        align-items: baseline;
+        margin: initial;
+        padding: initial;
+
+        * {
+            color: var(--interactive);
+        }
+
+        >*:last-child:after {
+            @extend %expand-icon;
+        }
+    }
+
+    >section>main {
+        max-height: none;
+        height: 0;
+        @include styled-scrollbar();
+    }
+
+    >section.opened {
+        >main {
+            height: auto;
+        }
+    }
+
+    &.first-as-intro {
+
+        section:first-child {
+            header {
+                display: none;
+            }
+
+            main {
+                padding-left: 0;
+            }
+        }
+    }
+
+    >section {
+
+        >header {
+            @extend .flex-center;
+            cursor: pointer;
+            user-select: none;
+
+            h1, h2, h3, h4, h5, h6 {
+                @extend .text-medium-headline;
+                @include space-vertical(0.5, 0.5);
+                margin-bottom: 0;
+                display: flex;
+                align-items: baseline;
+            }
+        }
+
+        >main {
+            max-height: 0;
+            transition: all 0.2s ease-out;
+            overflow: hidden;
+        }
+
+        // The section is opened to show the <main> contents
+        &.opened {
+            >header {
+                >*:last-child:after {
+                    content: $font-rosetta-icons-expand-minus;
+                }
+            }
+
+            >main {
+                max-height: none;
+            }
+        }
+
+        // Always keep this section open
+        &.always-opened {
+            >header {
+                cursor: default;
+
+                h1, h2, h3, h4, h5, h6 {
+                    padding-top: initial;
+                    color: inherit;
+                    @include space-bottom(0.5);
+                }
+
+                >*:last-child:after {
+                    display: none;
+                }
+            }
+
+            >main {
+                max-height: none;
+                height: auto;
+            }
+        }
+
+        // Note: The .closed-on-mobile is executed via JS entirely and just 
+        // sets or unsets the .opened class on load
+    }
+
+    // Animate the collapsing and expanding of the main section
+    &.animated {
+        >section.opened>main {
+            height: auto;
+            max-height: 1000rem;
+            // It should never not fit in the above, but if...
+            overflow-y: auto;
+        }
+    }
+
+    // Divide the sections of this accordion with lines
+    &.rules {
+        >section > header {
+            h1, h2, h3, h4, h5, h6 {
+                @include space-vertical(0.75, 0.75);
+            }
+        }
+        >section {
+            border-top: 1px solid var(--text);
+
+            &:last-of-type>main {
+                border-bottom: 1px solid var(--text);
+            }    
+        }
+    }
+}

@@ -1,0 +1,95 @@
+
+/**
+ * The Rosetta Design System base SCSS.
+ *
+ * DO NOT EDIT FILES IN THIS FOLDER :)
+ * (unless you intend to propagate and verify changes in all web projects!)
+ *
+ * This set of styles is supposed to be entirely website independent, so use
+ * this as a base and extend/overwrite/define site-specific styles in an
+ * entirely separate folder. The idea is that this folder can be used
+ * interchangably between projects!
+ */
+
+///////////////////////////////////////////////////////////////////////////////
+// Overwritable settings
+///////////////////////////////////////////////////////////////////////////////
+
+// UI fonts used on the site served from the tiny webfont service
+$font-path: "https://webfonts.rosettatype.com/rosetta";
+
+// The local repo fonts folder only retains the icon fonts any more
+$icon-font-path: "../fonts";
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Global variable declarations
+///////////////////////////////////////////////////////////////////////////////
+
+// Responsive layout
+$breakpoint-mini: 460px;
+$breakpoint-midi: 768px;
+$breakpoint-maxi: 1024px;
+$breakpoint-mega: 1280px;
+$breakpoint-max: 1920px;
+
+$text-max-width: 40rem;
+$aside-max-width: 25rem;
+
+$input-max-width: 25rem;
+
+// Default border as transparent, to be overwriten with color in theme
+$border: 1px solid transparent;
+$border-radius: 2px;
+$border-radius-large: 2px;
+
+// LAYOUT
+
+// General layouting space/padding
+$space: 48px;
+
+$gutter: 24px;
+
+// UI elements
+
+// Transitions
+$transition: all 0.1s ease-out;
+
+// Space between UI elements like buttons etc.
+$ui-space: 1rem;
+
+// note changing this requires re-aligning the rounded caps (separate elements) in _spinner.scss
+$spinner-size: 64px;
+
+$ui-element-height: 48px; // "overline" buttons, sliders, dropdowns
+$slider-thumb-size: 14px;
+
+// buttons
+$ui-button-height: 32px;
+$ui-button-height-large: $ui-element-height;
+$ui-button-height-small: 26px;
+
+// COLORS
+// These are defined as overwriteable from where this is imported to, and they
+// will default to globally defined CSS variables to be themeable.
+// It is preferrable to use the CSS variables directly insteaf of using these
+// scss variables!
+$text: var(--text) !default;
+$background: var(--background) !default;
+$interactive: var(--interactive) !default;
+$disabled: var(--disabled) !default;
+$disabled-text: var(--disabled) !default;
+$error: var(--error) !default;
+
+///////////////////////////////////////////////////////////////////////////////
+// Design system imports; order matters!
+///////////////////////////////////////////////////////////////////////////////
+
+@import "mixins";
+@import "rosetta-icons";
+
+@import "layout";
+@import "fonts";
+@import "typography";
+@import "forms";
+@import "buttons";

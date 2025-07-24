@@ -1,0 +1,40 @@
+// Basic grid (borders need drawing in the items' CSS) used in font meta and
+// font explore section
+
+ul.meta-grid {
+    list-style-type: none;
+    margin: 0;
+
+    li {
+        padding: 0;
+    }
+}
+
+.meta-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding-right: 1px;
+    padding-top: 1px;
+
+    >* {
+        margin-right: -1px;
+        margin-top: -1px;
+    }
+
+    @media screen and (min-width: 1600px) {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+
+    @include desktop {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    @include tablet {
+        grid-template-columns: 1fr;
+    }
+}
+
+%meta-grid-item {
+    aspect-ratio: 2;
+    border: 1px solid var(--border);
+}

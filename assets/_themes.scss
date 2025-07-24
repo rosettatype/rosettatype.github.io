@@ -1,0 +1,61 @@
+// These are placeholder-defaults, the actual theme colors get set in
+// _includes/head.html
+html.theme-dark {
+    
+    // Text, divider lines
+    --text: #ffffff;
+    
+    // Page background
+    --background: #080807;
+
+    // Tag and gallery borders; e.g. --background + 2x2x2x
+    --border: #282827;
+    
+    // Needed soley for tester UIs that need to overlap over the tester content
+    // For theme overwrites this is automatically set from: --background + EE
+    --background-transluscent: #080807EE;
+    
+    // Links, slider thumbs, button outlines
+    --interactive: #fff91e; // = #000000
+    
+    // Slider tracks, toggle tracks, gallery outlines, a mix of 
+    // --interactive against --background
+    --interactive-secondary: #4B4B19;
+    
+    // Disabled UI elements like inputs, buttons, off-state toggle thumbs, and
+    // current font in related families list
+    --disabled: #A9A9A9;
+    --error: #DF5149;
+}
+
+html.theme-light {
+    // Text, divider lines
+    --text: #000000;
+    
+    // Page background
+    --background: #faeef8;
+
+    // Tag and gallery borders; e.g. --background - 2x2x2x
+    --border: #daced8;
+    
+    // Needed soley for tester UIs that need to overlap over the tester content
+    // For theme overwrites this is automatically set from: --background + EE
+    --background-transluscent: #faeef8EE;
+    
+    // Links, slider thumbs, button outlines
+    --interactive: #262ac9;
+    
+    // Slider tracks, toggle tracks, gallery outlines, a mix of 
+    // --interactive against --background
+    --interactive-secondary: #8486da;
+    
+    // Disabled UI elements like inputs, buttons, off-state toggle thumbs, and
+    // current font in related families list
+    --disabled: #b9b9b9;
+    --error: #DF5149;
+}
+
+body {
+    background: var(--background);
+    color: var(--text);
+}

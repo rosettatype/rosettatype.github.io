@@ -1,0 +1,195 @@
+/**
+ * Reusable sizing for fonts menu and /fonts page as well as font explore 
+ * related families section.
+ *
+ * .font-grid-wrapper
+ *      .font-grid-sidebar
+ *          ...
+ *      .font-grid-main
+ *          .font-grid
+ *
+ * Note that the sizing of font-grid-main differ slightly between fonts menu
+ * and fonts page and the responsive breakpoints are different for each.
+ */
+
+// Responsive size modifiers that multiply the tile label font size while 
+// maintaining the grid_size factor intact (applied to parent element).
+$title_scale_mobile: 3.5em; // < 768
+$title_scale_tablet: 1.5em; // 768-1024
+$title_scale: 1.10em;       // 1024-1280
+
+// Above large desktop breakpoint the tiles and labels won't scale any more but
+// are set as an absolute value of the grid_size (not in vw, but in rem) — this
+// scales them to the same size as previous pre-large-breakpoint size, while
+// keeping their size absolute.
+$title_fixed_scale: 0.7em; // > 1280
+
+.font-grid {
+    @include styled-scrollbar();
+    @extend .plain-list;
+    display: grid;
+    grid-template-columns: 1fr;
+    padding-right: 1px;
+    padding-top: 1px;
+    max-height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    >* {
+        margin-right: -1px;
+        margin-top: -1px;
+        background: transparent;
+
+        @extend %meta-grid-item;
+
+        &.new {
+            background: color-mix(in srgb, var(--text), transparent 95%);
+        }
+
+        // When filtered hide the "new" items repeated at the beginning of the
+        // list so they don't appear double in the new filtered list
+        &.new.filter-active {
+            display: none !important;
+        }
+
+        a {
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            flex-direction: column;
+            height: 100%;
+            text-align: center;
+            text-decoration: none;
+
+            &:hover,
+            &:focus {
+                background: var(--interactive);
+                color: var(--background);
+
+                .new-label {
+                    background: var(--background);
+                    color: var(--interactive);
+                }
+            }
+
+            .new-label {
+                position: absolute;
+                @include space-left(0.25, "left");
+                @include space-top(0.25, "top");
+            }
+
+            .family-script-previews {
+                margin-top: -6%;
+            }
+
+            .family-title {
+                @extend .text-caption-bold;
+                position: absolute;
+                bottom: 15%;
+                left: 0;
+                width: 100%;
+
+            }
+        }
+    }
+}
+
+/**
+* Responsive sizing
+*/
+
+.font-grid-wrapper {
+    display: flex;
+}
+
+.font-grid-sidebar {
+    width: 25rem;
+}
+
+.font-grid-main {
+    width: 66.6%;
+
+    .font-grid {
+        grid-template-columns: 1fr 1fr;
+
+        .family-script-previews div span {
+            font-size: $title_scale;
+        }
+
+        .family-script-previews div.absolute-font-size {
+            display: none;
+        }
+    }
+}
+
+@include large-desktop-and-up {
+    .font-grid-main {
+        width: 75%;
+
+        .font-grid {
+            grid-template-columns: repeat(auto-fill, minmax(325px, 1fr));
+
+            .family-script-previews div span {
+                font-size: $title_fixed_scale;
+            }
+
+            .family-script-previews div {
+                display: none;
+            }
+
+            .family-script-previews div.absolute-font-size {
+                display: block;
+            }
+        }
+    }
+}
+
+@include desktop {
+    .font-grid-main {
+        width: 50%;
+
+        .font-grid {
+            grid-template-columns: 1fr;
+
+            .family-script-previews div span {
+                font-size: $title_scale_tablet;
+            }
+        }
+    }
+}
+
+
+// Single column mobile
+@include tablet {
+
+    .font-grid-wrapper {
+        @include styled-scrollbar();
+        display: block;
+        overflow-y: visible;
+    }
+
+    .font-grid-sidebar {
+        width: 100%;
+        height: auto;
+        position: relative !important;
+        top: auto !important;
+    }
+
+    .font-grid-main {
+        @include space-top(2);
+
+        width: 100%;
+        height: auto;
+        display: block;
+        overflow-y: visible;
+
+        .font-grid {
+            display: block;
+            overflow-y: visible;
+
+            .family-script-previews div span {
+                font-size: $title_scale_mobile;
+            }
+        }
+    }
+}

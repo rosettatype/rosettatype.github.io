@@ -1,0 +1,144 @@
+///////////////////////////////////////////////////////////////////////////////
+// Layout mixins (that need to come before other imports)
+///////////////////////////////////////////////////////////////////////////////
+@mixin mobile () {
+    @media screen and (max-width: $breakpoint-mini) {
+        @content;
+    }
+}
+
+@mixin tablet () {
+    @media screen and (max-width: $breakpoint-midi) {
+        @content;
+    }
+}
+
+@mixin desktop () {
+    @media screen and (max-width: $breakpoint-maxi) {
+        @content;
+    }
+}
+
+@mixin mobile-and-up() {
+    @media screen and (min-width: $breakpoint-mini) {
+        @content;
+    }
+}
+
+@mixin tablet-and-up() {
+    @media screen and (min-width: $breakpoint-midi) {
+        @content;
+    }
+}
+
+@mixin desktop-and-up() {
+    @media screen and (min-width: $breakpoint-maxi) {
+        @content;
+    }
+}
+
+@mixin large-desktop-and-up() {
+    @media screen and (min-width: $breakpoint-mega) {
+        @content;
+    }
+}
+
+@mixin desktop-minimum() {
+    @media screen and (min-height: 675px) and (min-width: 1100px) {
+        @content;
+    }
+}
+
+@mixin handheld {
+    @media (hover:none) and (orientation:portrait) and (max-width: 600px) {
+        @content;
+    }
+
+    @media (hover:none) and (orientation: landscape) and (max-height: 450px) {
+        @content;
+    }
+}
+
+@mixin space($vertical: 1, $horizontal: 1, $prop: "padding") {
+    #{$prop}: $space*$vertical*0.5 $space*$horizontal*0.5;
+
+    @include tablet-and-up () {
+        #{$prop}: $space*$vertical $space*$horizontal;
+    }
+}
+
+@mixin space-vertical($top: 1, $bottom: 1, $prop: "padding") {
+    @include space-top($top, #{$prop}-top);
+    @include space-bottom($bottom, #{$prop}-bottom);
+}
+
+@mixin space-horizontal($left: 1, $right: 1, $prop: "padding") {
+    @include space-left($left, #{$prop}-left);
+    @include space-right($right, #{$prop}-right);
+}
+
+@mixin space-top($top: 1, $prop: "padding-top") {
+    #{$prop}: $space*$top*0.5;
+
+    @include tablet-and-up () {
+        #{$prop}: $space*$top;
+    }
+}
+
+@mixin space-bottom($bottom: 1, $prop: "padding-bottom") {
+    #{$prop}: $space*$bottom*0.5;
+
+    @include tablet-and-up () {
+        #{$prop}: $space*$bottom;
+    }
+}
+
+@mixin space-left($left: 1, $prop: "padding-left") {
+    #{$prop}: $space*$left*0.5;
+
+    @include tablet-and-up () {
+        #{$prop}: $space*$left;
+    }
+}
+
+@mixin space-right($right: 1, $prop: "padding-right") {
+    #{$prop}: $space*$right*0.5;
+
+    @include tablet-and-up () {
+        #{$prop}: $space*$right;
+    }
+}
+
+@mixin maxwidth($w: 1280px) {
+    max-width: $w;
+    padding: 0 $space;
+    margin: 0 auto;
+    width: 100%;
+
+    @include tablet {
+        padding: 0 ($space*0.5) 0;
+    }
+}
+
+@mixin styled-scrollbar($thumb: var(--background), $track: var(--interactive)) {
+    /* Foreground, Background */
+    scrollbar-color: $track $thumb;
+
+    &::-webkit-scrollbar {
+        width: 8px;
+        /* Mostly for vertical scrollbars */
+        height: 15px;
+        /* Mostly for horizontal scrollbars */
+    }
+
+    &::-webkit-scrollbar-thumb {
+        /* Foreground */
+        background: $track;
+        border-radius: 5px;
+    }
+
+    &::-webkit-scrollbar-track {
+        /* Background */
+        background: $thumb;
+    }
+}

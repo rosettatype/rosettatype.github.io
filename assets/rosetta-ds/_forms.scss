@@ -1,0 +1,363 @@
+// Helper remove any browser styling from input elements
+%styled-input {
+    -webkit-appearance: none;
+    margin: 0;
+    cursor: pointer;
+    position: relative;
+    outline: none !important;
+    box-sizing: border-box;
+    border: none;
+    box-shadow: none;
+}
+
+fieldset {
+    border: 0;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+
+    +fieldset {
+        @include space-top(0.5);
+    }
+}
+
+// Generic form row to space things out evenly
+.form-row {
+    @include space-bottom(0.35);
+    display: block;
+
+    label {
+        display: flex;
+        flex-grow: 1;
+    }
+}
+
+.form-row-error {
+    @include font-mono(800);
+    font-size: 10px;
+    line-height: 32px;
+    padding: 1px 0.5rem 0;
+    background: $error;
+    color: $background;
+    width: 100%;
+    max-width: 25rem;
+    margin-bottom: -2px;
+
+    border-top-left-radius: $border-radius;
+    border-top-right-radius: $border-radius;
+
+    p {
+        text-transform: uppercase;
+    }
+
+    p:before {
+        content: "↓";
+        margin-right: 1em;
+    }
+}
+
+.has-errors {
+
+    label.input:after,
+    label.stringfield:after {
+        font-family: "rosetta-icons";
+        font-size: 1rem;
+        content: $font-rosetta-icons-checkmark-small-filled-x;
+
+        pointer-events: none;
+        border-radius: 100px;
+        height: 1rem;
+        width: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: var(--error);
+        position: relative;
+        right: 1.25rem;
+        top: .4rem;
+        font-weight: bold;
+    }
+}
+
+/**
+ * Generic text input
+ */
+%input,
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=phone] {
+    @include font-mono(800, true);
+    padding: 0 20px;
+    height: $ui-button-height + 2px;
+    line-height: $ui-button-height;
+    border: 2px dashed $interactive;
+    border-radius: $border-radius;
+    font-size: 12px;
+    line-height: 32px;
+    letter-spacing: 0.1em;
+    color: $interactive;
+    padding-left: 10px;
+    padding-right: 10px;
+    background: $background;
+    transition: border-color 0.2s ease-out;
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    max-width: 25rem;
+
+    &:required,
+    &[required],
+    &.required {
+        border-style: solid;
+    }
+
+    &:hover,
+    &:focus {
+        outline: none;
+        border-color: var(--text);
+    }
+
+    &::placeholder {
+        @include font-mono(800, true);
+        color: $interactive;
+        opacity: 1;
+    }
+
+    &.disabled &[disabled] {
+        cursor: not-allowed;
+        opacity: 0.25;
+    }
+
+    .has-errors & {
+        border-color: $error;
+        color: $error;
+    }
+}
+
+/**
+ * Toggle styled checkbox
+ */
+label.toggle {
+    $toggle-width: 32px;
+    $toggle-track-height: 8px;
+    $toggle-knob-diameter: 18px;
+    $toggle-track-padding: (($toggle-knob-diameter - $toggle-track-height) * 0.5);
+
+    @extend .text-body-smaller;
+    cursor: pointer;
+    padding-left: $toggle-width + 15px;
+    display: inline-block;
+    color: $interactive;
+
+    input[type=checkbox] {
+        -webkit-appearance: none;
+        appearance: none;
+        position: relative;
+        height: 0;
+        width: 0;
+        overflow: hidden;
+        display: inline-block;
+
+        &+* {
+            @include font-text(400);
+            display: inline-block;
+
+            height: $toggle-knob-diameter;
+            width: $toggle-width;
+            // padding: $toggle-track-padding 0;
+            padding: 0;
+            cursor: pointer;
+            position: absolute;
+            left: 0;
+            top: -$toggle-track-padding;
+            transform: translateY(0.25em);
+
+            // The track
+            &:before {
+                content: " ";
+                display: inline-block;
+                border-radius: $toggle-track-height;
+                background: var(--interactive-secondary);
+                height: $toggle-track-height;
+                width: 100%;
+            }
+
+            // The toggle round indicator
+            &:after {
+                content: " ";
+                width: $toggle-knob-diameter;
+                height: $toggle-knob-diameter;
+                border-radius: 100%;
+                position: absolute;
+                top: $toggle-track-padding;
+                left: 0;
+                transition: all 0.1s ease-out;
+
+                // Off: left
+                background: var(--interactive);
+                transform: translateX(0);
+            }
+        }
+
+        &:checked+* {
+
+            &:after {
+                // On: right
+                background: var(--interactive);
+                transform: (translateX($toggle-width - $toggle-knob-diameter));
+            }
+        }
+
+        &:disabled+* {
+            &:before {
+                background: $disabled;
+            }
+            &:after {
+                background: $disabled;
+            }
+        }
+    }
+
+    >span {
+        display: block;
+        float: left;
+    }
+
+    &:hover span,
+    &:focus span {
+        text-decoration: underline;
+    }
+}
+
+@mixin label-checkbox($size: 20px) {
+    cursor: pointer;
+    display: inline-block;
+    color: $interactive;
+    text-decoration: none !important;
+    display: flex;
+
+    @extend .text-body-smaller;
+    line-height: $size * 1.25;
+    color: var(--text);
+
+    input[type=checkbox] {
+        @extend %styled-input;
+
+        height: 0;
+        width: 0;
+        overflow: hidden;
+        display: inline-block;
+
+        &:focus {
+            &+*:before {
+                border-color: var(--text) !important;
+            }
+        }
+
+        &+* {
+            display: inline-block;
+            position: relative;
+
+            cursor: pointer;
+            padding: 0 0 0 $size + 15px;
+
+            // The checkbox and checkmark
+            &:before,
+            &:after {
+                position: absolute;
+                left: 0;
+                top: 0;
+                height: $size;
+                width: $size;
+            }
+
+            // The border for "unchecked" state
+            &:before {
+                content: " ";
+                display: inline-block;
+                background: transparent;
+                border: 2px solid $interactive;
+                border-radius: $border-radius;
+            }
+
+            // The checkmark (for the checked state)
+            &:after {
+                font-family: "rosetta-icons";
+                display: none;
+                font-style: normal;
+                color: $interactive;
+                content: $font-rosetta-icons-checkmark;
+                position: absolute;
+                top: 3px;
+                left: 7px;
+                font-size: 9px;
+                line-height: $size;
+                transition: all 0.1s ease-out;
+            }
+        }
+
+        &:checked+* {
+            &:before {
+                background: $interactive;
+            }
+
+            &:after {
+                color: $background;
+                content: $font-rosetta-icons-checkmark;
+                display: block;
+            }
+        }
+
+        &:disabled+* {
+            &:after {
+                background: $disabled;
+            }
+        }
+    }
+
+    &:hover,
+    &:focus {
+        text-decoration: underline;
+    }
+}
+
+
+/**
+ * Styled checkbox (WIP)
+ */
+label.checkbox {
+    @include label-checkbox(20px);
+}
+
+/**
+ * Round checkbox UI element styled checkbox
+ */
+label.checkmark {
+    $size: 22px;
+    @include label-checkbox($size);
+
+    &:hover {
+        color: var(--text);
+    }
+
+    input[type=checkbox] {
+        &+* {
+
+            // The border for "unchecked" state
+            &:before {
+                border-radius: $size;
+            }
+
+            // The checkmark (for the checked state)
+            &:after {
+                top: 2px;
+                left: 7px;
+            }
+        }
+
+        &:focus+* {
+            color: var(--text);
+        }
+    }
+}

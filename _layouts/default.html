@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="theme-light">
 
 <head>
     <meta charset="utf-8">
@@ -17,49 +17,31 @@
     <meta name="description" content="{{ site.description }}">
 
     <!-- CSS (from rosettatype.github.io) -->
-    <link rel="stylesheet" href="https://github.rosettatype.com/assets/styles.css">
+    <link rel="stylesheet" href="assets/styles.css">
 
     <script async defer data-domain="github.rosettatype.com" src="https://plausible.io/js/plausible.js"></script>
 </head>
 
 <body>
-  <div class='navbar fixed'>
-     <div class='container'>
-        <a href="https://rosettatype.com" class='pull-left logo'>Rosetta</a>
-        <ul class='pull-right'>
+  <header id="nav">
+      <ul class="main-nav-items">
            <li><a href='https://rosettatype.com'>Website</a></li>
            <li><a href='{{ site.github.repository_url }}'>GitHub</a></li>
            <li><a href='https://www.rosettatype.com/contact'>Contact</a></li>
-        </ul>
-     </div>
-  </div>
-
-  <div class="container">
-    <div class="grid">
-      <div class="row">
-        <div class="span twelve">
-          {{ content }}
-        </div>
+      </ul>
+      <div id="title-wrapper">
+          <a id="title" href="/">Rosetta</a>
       </div>
+  </header>
 
-      {% if page.home == null %}
+  <main>
+      
+      {{ content }}
 
-      <div class="divider"></div>
-
-      <div class="row">
-        <div class="span twelve">
-          <a class="secondary" href="../">Back</a>
-        </div>
-      </div>
-
-      {% endif %}
-
-      <div class="divider"></div>
-
-      <div class="row">
-        <div class="span ten gray">© Rosetta Type Foundry, 2015.</div>
-      </div>
-    </div>
-  </div>
+      <footer>
+        <div class="span ten gray">Copyright © Rosetta Type Foundry, s.r.o. and respective designers, 2011–2025.</div>
+      </footer>
+      
+  </main>
 </body>
 </html>

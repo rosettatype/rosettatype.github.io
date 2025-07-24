@@ -1,0 +1,366 @@
+// The minimum width of the dark menu overlay background that remains clickable
+// to close the menu again.
+$menu-overlay-min-width: 5rem;
+$menu-mobile-bp: 600px; // empirically determined, by when the menu items and the logo touch
+
+// Just a dummy from which to extract the scrollbar width via Javascript, upon
+// opening the menu, to offset the body width and prevent a jump
+.styled-scrollbar {
+    @include styled-scrollbar();
+}
+
+html.menu-open {
+    overflow: hidden;
+    // The offset is set in javascript to equal the scrollbar width of the 
+    // browser, see header.js
+    // padding-right: 20px;
+}
+
+#nav a,
+#menu a {
+    &.current {
+        color: var(--text);
+        text-decoration: none;
+        pointer-events: none;
+    }
+}
+
+#nav {
+    display: flex;
+    justify-content: flex-start;
+    align-items: baseline;
+    position: absolute;
+    z-index: 99;
+    @include space-left(1, "left");
+    @include space-right(1, "right");
+    @include space-top(0.75, "top");
+}
+
+ul.main-nav-items {
+    @extend .text-caption-bold;
+    display: flex;
+    flex-wrap: wrap; // last resort, allow line breaks on tiny mobile
+    margin: 0;
+    list-style: none;
+
+    li {
+        padding: 0;
+    }
+
+    li+li {
+        margin-left: 1em;
+    }
+
+    li.main-nav-item-theme {
+        margin-left: auto;
+    }
+}
+
+#nav>ul.main-nav-items {
+    @media screen and (max-width: ($menu-mobile-bp)) {
+        display: none;
+    }
+}
+
+#title-wrapper {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+}
+
+// The Rosetta logo
+#title {
+    @include underline(4px, var(--text), var(--interactive), 5px);
+    color: var(--text);
+    display: inline-block;
+    z-index: 99;
+
+    @include font-display(800);
+    font-feature-settings: "ss16" 1;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: 0.02em;
+
+    opacity: 1;
+    transition: opacity 0.15s ease-out;
+
+    top: -7px;
+
+    // Super extra micro tweak, inset the underline to align with the letters,
+    // not the text box
+    &:after {
+        left: 1.25px;
+        right: 1.25px;
+    }
+
+    &:hover,
+    &:focus {
+        color: var(--interactive);
+    }
+
+    @include tablet {
+        top: -6px;
+    }
+}
+
+// The header main menu for tablet and up
+#menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1999999;
+    transform: translateX(-100%);
+    transition: all 0.35s ease-in-out 0.1s;
+
+    &.open {
+        transform: translateX(0);
+
+        #menu-close {
+            opacity: 0.75;
+        }
+
+        .menu-leaf {
+            opacity: 1;
+        }
+
+        #menu-wrapper {
+            pointer-events: all;
+        }
+    }
+
+    // The cover of the site underneath
+    #menu-close {
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        width: 500vw; // oversize, so animating it in will not show uncovered area
+        height: 100vh;
+        overflow: hidden;
+        background: var(--text);
+        opacity: 0; // 0.75 when active
+        transition: opacity 0.4s ease-out;
+        z-index: 1;
+    }
+
+    #menu-wrapper {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: calc(100% - #{$menu-overlay-min-width});
+        height: 100%;
+        z-index: 2;
+        pointer-events: none;
+    }
+
+    .menu-leaf {
+        display: flex;
+        z-index: 9;
+        opacity: 0; // 1 when active
+        transition: opacity 0.35s ease-out 0.2s;
+        transform: translateX(-120%); // 0 when active; go beyond -100% to _certainly_ be off the screen
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: auto;
+        user-select: none;
+
+        &.active {
+            transform: translateX(0);
+        }
+
+        &[data-submenu=fonts] {
+            width: 100%;
+        }
+    }
+
+    // The left bit of the main menu; always contains the main menu items,
+    // possibly some sub menu items or for the fonts menu the filters
+    .menu-sidebar {
+        @include styled-scrollbar();
+        @include space-left(1, "padding-left");
+        @include space-right(1, "padding-right");
+        @include space-top(0.75, "padding-top");
+        @include space-bottom(0.75, "padding-bottom");
+
+        height: 100%;
+        box-sizing: border-box;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        background: var(--background);
+        pointer-events: all;
+
+        h1 {
+            @extend .text-medium-headline-display;
+            @include space-vertical(0.75, 0.75);
+            margin-bottom: 0;
+        }
+    }
+
+    // The right hand part of the menu, only used for the fonts menu right now
+    .menu-main {
+        background: var(--background);
+        pointer-events: all;
+        @include styled-scrollbar();
+    }
+
+    ul {
+        @extend .text-caption-bold;
+    }
+
+    ul.submenu {
+        @extend .plain-list;
+
+        li+li {
+            margin-top: 0.5rem;
+        }
+    }
+
+    .accordion {
+        main {
+            @extend .tags-list;
+        }
+    }
+
+    /**
+     * Responsive sizing specific to the main menu. The font grid sidebar and 
+     * main grid have their own responsive CSS shared between font menu and
+     * font page. See _font-grid.scss
+     */
+
+    .menu-leaf[data-submenu=services] .menu-sidebar,
+    .menu-leaf[data-submenu=more] .menu-sidebar {
+        width: 40% !important;
+        max-width: 500px !important;
+        min-width: 20rem;
+    }
+
+    // Single column mobile
+    @include tablet {
+
+        #menu-wrapper {
+            width: calc(100% - 48px);
+        }
+        
+        .menu-leaf.active {
+            @include styled-scrollbar();
+            display: block !important;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
+            overscroll-behavior: contain; 
+            touch-action: auto;
+            background: var(--background);
+            min-height: 100vh;
+            max-width: calc(100vw - 48px); // always keep the close bar visible!
+        }
+
+        // On mobile the fonts sidebar and fonts main grid are stacked, so make
+        // the sidebar height auto to compact
+        .menu-leaf[data-submenu=fonts] .menu-sidebar {
+            height: auto;
+        }
+
+        .menu-leaf[data-submenu=services] .menu-sidebar,
+        .menu-leaf[data-submenu=more] .menu-sidebar {
+            min-width: 0 !important;
+        }
+
+        .menu-leaf[data-submenu=services] .menu-sidebar,
+        .menu-leaf[data-submenu=more] .menu-sidebar,
+        .menu-sidebar {
+            width: 100% !important;
+            height: 100%;
+        }
+
+        .menu-main {
+            width: 100%;
+            height: auto;
+            display: block;
+            overflow-y: visible;
+
+            .font-grid {
+                display: block;
+                overflow-y: visible;
+                max-height: none;
+                padding-bottom: 10vh; // spare possible iOS browser bar at the bottom
+            }
+        }
+    }
+}
+
+
+// The switch can be placed in different places, #theme-switch is the one in the
+// standard header, but e.g. on the font pages there is another button place next
+// to the family card
+.theme-switch {
+    $size: 40px;
+    background: transparent !important;
+    color: var(--text) !important;
+    border-radius: 100%;
+    border: none;
+    display: inline-block;
+    width: $size;
+    height: $size;
+    line-height: $size;
+    z-index: 9;
+    text-align: center;
+    margin-left: 0 !important;
+    margin-top: -8px;
+
+    &:hover {
+        color: var(--interactive) !important;
+    }
+
+    i {
+        display: block;
+        font-size: 20px;
+        margin-left: -7px;
+        margin-top: 2px;
+    }
+}
+
+
+
+// Menu open close button in one, has both icons inside, the correct one shown
+// depending on state
+// Shown only on mobile to toggle the #menu-mobile visibility
+#menu-toggle {
+    @include space-left(1, "left");
+    @include space-top(0.75, "top");
+    @include space-top(-0.125, "margin-top");
+
+    @include space-left(-0.25, "margin-left");
+    @extend button;
+
+    position: fixed;
+    z-index: 99;
+
+    $size: 40px;
+    background: var(--interactive);
+    color: var(--background);
+    border-radius: 100%;
+    display: inline-block;
+    width: $size;
+    height: $size;
+    line-height: $size;
+    padding: 0;
+    min-width: 0;
+
+    @media screen and (min-width: $menu-mobile-bp) {
+        display: none;
+    }
+
+    i {
+        display: block;
+        font-size: 20px;
+    }
+
+    .icon-close {
+        display: none;
+    }
+}

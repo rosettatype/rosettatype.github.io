@@ -1,0 +1,189 @@
+.split-2 {
+    width: 100% !important;
+    column-count: 2;
+    column-gap: $gutter;
+
+    >* {
+        break-inside: avoid;
+        margin-bottom: 1rem;
+        max-width: $text-max-width;
+    }
+}
+
+body>main {
+    @include space-vertical(1.5, 1.5, "padding");
+
+    @include mobile {
+        @include space-vertical(3, 3, "padding");
+    }
+}
+
+/**
+ * Reusable content section types
+ */
+
+// Two column split with h1 across and offset to the right
+body>main>section.split-text {
+    // max-width: $breakpoint-max;
+
+    .columns>h1 {
+        margin-bottom: 1em !important;
+    }
+
+    h2 {
+        margin-bottom: 1rem;
+    }
+
+    .columns {
+
+        >* {
+            // @extend .margin-left-2;
+            @extend .cols-12;
+            max-width: $text-max-width;
+
+            &.highlight-list {
+                padding: 0;
+            }
+        }
+    }
+
+    @include desktop {
+        .columns>* {
+            @include cols(12);
+            margin-left: 0;
+        }
+    }
+
+    @include tablet {
+        .columns {
+            flex-wrap: wrap;
+            margin-left: 0;
+            margin-right: 0;
+
+            >* {
+                @include cols(24);
+                margin-left: 0;
+                padding-left: 0;
+                padding-right: 0;
+                @include space-bottom(2.5);
+
+                &:last-child {
+                    padding-bottom: 0;
+                }
+            }
+        }
+    }
+
+    @include mobile {
+        .columns>h1 {
+            margin-bottom: 0;
+        }
+
+        h2 {
+            margin-bottom: 0;
+        }
+
+        p {
+            @include space-right(-0.5, "margin-right");
+            -webkit-hyphens: auto;
+            hyphens: auto;
+        }
+    }
+}
+
+.text-cols-2 {
+    column-count: 2;
+    column-gap: 0;
+    flex-wrap: wrap;
+    display: block;
+
+    >* {
+        break-inside: avoid;
+        width: 100% !important;
+        max-width: $text-max-width;
+    }
+
+    @include tablet {
+        column-count: 1;
+    }
+
+    @include large-desktop-and-up {
+        max-width: $text-max-width * 2;
+    }
+}
+
+.section-above {
+    @include space-top(4, "margin-top");
+}
+
+// Large text intro on all pages; shorter ones use extra large headlines,
+// whereas the "paragraph" like longer ones have a tad smaller headlines.
+.hero-intro {
+    h1 {
+        @include text-extra-large-headline();
+        max-width: $breakpoint-mega;
+        margin-bottom: 2rem;
+
+        a {
+            display: inline-block;
+            margin-top: 2rem;
+        }
+    }
+
+    // Long-form intros a tad smaller
+    h1.long {
+        @include text-largest-headline();
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+
+    // On desktop sizes offset the intro and optional button
+    @include tablet-and-up {
+        h1.long {
+            @include cols(18);
+            @include text-largest-headline();
+        }
+    }
+}
+
+
+// Our little friendly spacer
+.elephantino {
+
+    margin: 10rem auto 5rem;
+    display: block;
+    width: 2.5rem;
+    height: 2.5rem;
+    color: var(--interactive);
+    font-size: 2.5rem;
+
+    &:before {
+        font-family: "rosetta-icons";
+        content: $font-rosetta-icons-elephantino;
+    }
+}
+
+// Some column helper for nested columns
+.cols-30p {
+    width: calc(100% / 10 * 3);
+    padding-left: $gutter * 0.375;
+}
+
+.cols-70p {
+    width: calc(100% / 10 * 7);
+}
+
+.columns .columns>* {
+    @include tablet {
+        padding-left: $gutter * 0.25;
+    }
+}
+
+.rows {
+    flex-wrap: wrap;
+}
+
+.row {
+    flex-wrap: nowrap;
+    width: 100%;
+}

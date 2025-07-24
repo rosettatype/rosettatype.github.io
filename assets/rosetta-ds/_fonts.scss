@@ -1,0 +1,145 @@
+/**
+ * Define Adapter fallback fonts for non-variable-font non-woff2 browsers with
+ * AdapterOPSZ names and distinct font-weight
+ */
+
+@supports(font-variation-settings: initial) {
+    @font-face {
+        font-family: "Adapter PE VF";
+        src: url("#{$font-path}/AdapterPEVFWeb-All.woff2") format("woff2");
+        font-weight: 100 900;
+        font-style: oblique 0deg -9.5deg;
+    }
+
+    // Script fallbacks, VF only to keep it simple
+    @font-face {
+        font-family: "Adapter Arabic VF";
+        src: url("#{$font-path}/AdapterArabicVFWeb-All.woff2") format("woff2");
+        font-weight: 100 900;
+        font-style: oblique 0deg -9.5deg;
+    }
+}
+
+/* Mono Variable font all in one, if supported */
+@supports (font-variation-settings: initial) {
+    @font-face {
+        font-display: block;
+        font-family: "Adapter PE Mono VF";
+        font-weight: 100 900;
+        font-style: normal;
+        src: url("#{$font-path}/AdapterMonoPEVFWeb-All.woff2") format("woff2");
+    }
+}
+
+/**
+ * As non-VF fallback define all Adapter PE static styles for their specific
+ * weight. If the VF declaration does not get applied browsers fall back to 
+ * these, based on identical family name and their respective weight.
+ */
+$styles: (
+    "Th": 100,
+    "El": 200,
+    "Lt": 300,
+    "Rg": 400,
+    "Me": 500,
+    "Sb": 600,
+    "Bd": 700,
+    "Eb": 800,
+    "Bl": 900
+);
+
+@each $st,
+$wg in $styles {
+
+    // Text
+    @font-face {
+        font-family: "Adapter PE Text";
+        src: url("#{$font-path}/AdapterPETextWeb-#{$st}.woff2") format("woff2");
+        font-weight: $wg;
+        font-style: normal;
+    }
+
+    // Display
+    @font-face {
+        font-family: "Adapter PE Display";
+        src: url("#{$font-path}/AdapterPEDisplayWeb-#{$st}.woff2") format("woff2");
+        font-weight: $wg;
+        font-style: normal;
+    }
+
+    // Mono
+    // Mono won't have all these styles but it doesn't matter too much since
+    // they are only requested if trying to use (:
+    @font-face {
+        font-family: "Adapter PE Mono";
+        src: url("#{$font-path}/AdapterMonoPEWeb-#{$st}.woff2") format("woff2");
+        font-weight: $wg;
+        font-style: normal;
+    }
+
+    // Text Italic
+    @font-face {
+        font-family: "Adapter PE Text";
+        src: url("#{$font-path}/AdapterPETextWeb-#{$st}.woff2") format("woff2");
+        font-weight: $wg;
+        font-style: normal;
+    }
+
+    // Display Italic
+    @font-face {
+        font-family: "Adapter PE Display";
+        src: url("#{$font-path}/AdapterPEDisplayWeb-#{$st}.woff2") format("woff2");
+        font-weight: $wg;
+        font-style: normal;
+    }
+
+    // Mono Italic
+    // Mono won't have all these styles but it doesn't matter too much since
+    // they are only requested if trying to use (:
+    @font-face {
+        font-family: "Adapter PE Mono";
+        src: url("#{$font-path}/AdapterMonoPEWeb-#{$st}.woff2") format("woff2");
+        font-weight: $wg;
+        font-style: normal;
+    }
+}
+
+@mixin font-display($wght: 400, $italic: false) {
+    font-family: "Adapter PE VF", "Adapter PE Display", "Adapter Arabic VF", sans-serif;
+    font-weight: $wght;
+    letter-spacing: 0.02em;
+
+    @if ($italic==false) {
+        font-variation-settings: "opsz" 18, "wght"$wght, "slnt" 0;
+    }
+
+    @else {
+        font-variation-settings: "opsz" 18, "wght"$wght, "slnt" -10;
+    }
+}
+
+@mixin font-text($wght: 400, $italic: false) {
+    font-family: "Adapter PE VF", "Adapter PE Text", "Adapter Arabic VF", sans-serif;
+    font-weight: $wght;
+
+    @if ($italic==false) {
+        font-variation-settings: "opsz" 4, "wght"$wght, "slnt" 0;
+    }
+
+    @else {
+        font-variation-settings: "opsz" 4, "wght"$wght, "slnt" -10;
+    }
+}
+
+@mixin font-mono($wght: 400, $italic: false) {
+    font-family: "Adapter PE Mono VF", "Adapter PE Mono", monospace;
+    font-weight: $wght;
+
+    @if ($italic==false) {
+        font-variation-settings: "wght"$wght;
+    }
+
+    @else {
+        font-variation-settings: "wght"$wght, "slnt" -10, "ital" 1;
+    }
+}

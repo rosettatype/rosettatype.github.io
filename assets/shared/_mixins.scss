@@ -1,0 +1,21 @@
+
+@mixin more-lines($offset: 0, $offsetAttr: top, $color: var(--interactive), $overshoot: 0) {
+
+    &:before,
+    &:after {
+        content: " ";
+        display: block;
+        #{$offsetAttr}: $offset;
+        left: $overshoot;
+        position: absolute;
+        height: 8px;
+        width: calc(100% + #{$overshoot * -2});
+        border-top: 1px solid $color;
+        border-bottom: 1px solid $color;
+    }
+
+    &:after {
+        #{$offsetAttr}: ($offset + 3px);
+        height: 2px;
+    }
+}

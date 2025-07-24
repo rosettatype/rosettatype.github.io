@@ -17,15 +17,27 @@ markdown: kramdown
 
 # Articles showed on homepage
 articles:
+  - title: Hyperglot
+    link: https://hyperglot.rosettatype.com
+    description: 'Hyperglot helps type designers answer a seemingly simple question of language support in fonts: When can I use font A to set texts in language B? It takes a pragmatic answer by identifying a standard character set for each orthography used by a language. Hyperglot is a webapp and an open-sourced project available as a command-line tool, Python package, and database.'
+  - title: Handjet
+    link: https://rosettatype.com/Handjet
+    description: Handjet is a grid-based variable font where every glyph is composed of multiple copies of the same modular element. The 23 element shapes, their sizes, and transitions between the elements allow users to create an array of effects and animations. 
+  - title: Design Regression
+    link: https://designregression.com
+    description: Design Regression is a journalette (mini journal) publishing texts that are about design for reading and reading-related research. It aims for the hard-to-get blend of approachability with seriousness and relevance to practice.
+  - title: All types of “a” with brief descriptions from the website.
+    link: https://all-types-of-a.rosettatype.com
+    description: An inclusive collection of peculiar shapes of the Latin lowercase letter ‘a’ (Unicode U+0061) has been selected to illustrate that an essential form of ‘a’ (if it exists) must be quite complex.
   - title: Eczar
     link: https://github.com/rosettatype/eczar
     description: Latin + Devanagari type family with 5 weights
   - title: Yrsa & Rasa
-    link: https://github.rosettatype.com/yrsa-rasa
+    link: https://github.com/rosettatype/yrsa-rasa
     description: Latin & Gujarati type families with 5 weights
-  - title: repos
-    link: https://github.com/rosettatype/repos
-    description: Quick and dirty Python script to track multiple Git repositories and easily fetch updates
-  - title: post-production scripts
-    link: https://github.com/rosettatype/post-production-scripts
-    description: Publicly available command-line tools used for post-production of Rosetta fonts
+  # - title: repos
+  #   link: https://github.com/rosettatype/repos
+  #   description: Quick and dirty Python script to track multiple Git repositories and easily fetch updates
+  # - title: post-production scripts
+  #   link: https://github.com/rosettatype/post-production-scripts
+  #   description: Publicly available command-line tools used for post-production of Rosetta fonts

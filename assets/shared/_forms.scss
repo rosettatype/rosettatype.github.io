@@ -1,0 +1,223 @@
+
+/**
+ * Styled input range wrapper with label
+ */
+.slider {
+    // Set variables for imported cross-browser slider styling
+    $track-color: var(--interactive-secondary);
+    $ie-bottom-track-color: var(--text);
+    $thumb-color: var(--interactive);
+
+    $thumb-radius: 7px;
+    $thumb-height: 14px;
+    $thumb-width: 14px;
+    $thumb-shadow-size: 0;
+    $thumb-shadow-blur: 0;
+    // $thumb-shadow-color: rgba(0, 0, 0, .2) !default;
+    $thumb-border-width: 0;
+    // $thumb-border-color: #eceff1 !default;
+
+    $track-width: 100% !default;
+    $track-height: 1px;
+    $track-shadow-size: 0;
+    $track-shadow-blur: 0;
+    // $track-shadow-color: rgba(0, 0, 0, .2) !default;
+    $track-border-width: 1px;
+    $track-border-color: $track-color;
+
+    $track-radius: 2px;
+    $contrast: 0;
+    $interactive: var(--interactive);
+
+    max-width: 5.75rem;
+    flex-grow: 1.5;
+    flex-shrink: 1.5;
+    height: calc(#{$space} + #{$thumb-height});
+
+    @import "forms.sliders";
+
+    label {
+        @extend .label-line-interactive;
+        border-top-color: var(--interactive);
+        color: var(--interactive);
+        display: block;
+        white-space: pre;
+
+        &:hover,
+        &:focus {
+            text-decoration: none !important;
+        }
+    }
+
+    input[type=range] {
+        position: relative;
+        top: -$thumb-height;
+    }
+
+    &+.slider {
+        margin-left: $ui-space;
+    }
+
+    [dir=rtl] &+.slider {
+        margin-left: initial;
+        margin-right: $ui-space;
+    }
+}
+
+
+@import "./forms.dropdowns";
+
+.dropdown {
+    height: $ui-element-height;
+    cursor: pointer;
+    overflow: hidden;
+
+    &.dropdown-flexible-width {
+        display: inline-block;
+        width: auto;
+    }
+
+    &.single-option {
+        cursor: normal;
+        pointer-events: none;
+
+        .dropdown-selected {
+            padding-right: 0;
+        }
+
+        .dropdown-selected:after {
+            display: none;
+        }
+    }
+
+    &.has-selection {
+
+        // For FilterDropdowns, a selected option should render as a tag-like
+        // button with a closeing x appended to it
+        .dropdown-selected {
+            
+            cursor: pointer;
+            display: inline-block;
+            transition: $transition;
+            text-align: center;
+            
+            // Never line-break buttons
+            white-space: pre;
+            @include font-mono(600);
+            
+            background: var(--interactive) !important;
+            color: var(--background) !important;
+            border: 2px var(--interactive) solid !important;
+            border-radius: 2px;
+            
+            min-height: auto;
+            padding: 0 20px;
+            height: $ui-element-height;
+            line-height: $ui-element-height - 4px;
+
+            &:before {
+                content: "Filter: ";
+            }
+
+            i {
+                margin-left: 0.25rem;
+                margin-right: -0.25rem;
+                font-size: 15px;
+                top: 2px;
+                position: relative;
+            }
+
+            // Hide the regular dropdown arrow
+            &:after {
+                display: none;
+            }
+        }
+    }
+
+    .dropdown-selected {
+        @extend .label-line-interactive;
+        cursor: pointer;
+        display: block;
+        background: none;
+        line-height: $ui-element-height;
+        position: relative;
+        padding-right: 0.85rem;
+        white-space: pre;
+        transition: none !important;
+
+        &:after {
+            font-family: "rosetta-icons";
+            content: $font-rosetta-icons-arrow-down;
+            margin-left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        &:hover,
+        &:focus {
+            @include font-mono(750);
+        }
+    }
+
+    select {
+        appearance: none;
+        pointer-events: none;
+        width: 0;
+        position: absolute;
+        left: 0;
+        top: 0;
+        transform: translateX(-100%);
+    }
+}
+
+// Newsletter signup form with email+submit
+form.newsletter {
+
+    fieldset {
+        display: flex;
+        align-items: stretch;
+        flex-wrap: wrap;
+    }
+
+    p.note {
+        margin-top: 1em;
+        max-width: 20rem;
+        font-size: inherit;
+        font-weight: inherit;
+        font-family: inherit;
+    }
+
+    input[type=email] {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+        border-style: solid;
+        border-right-width: 0;
+        flex-grow: 1;
+        max-width: 15rem;
+    }
+
+    input[type=submit] {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+
+        &:hover,
+        &:focus {
+            border-color: var(--interactive) !important;
+        }
+    }
+
+    &:hover,
+    &:focus {
+        input[type=email],
+        input[type=submit] {
+            border-color: var(--text);
+        }
+    }
+
+    &.success {
+        p.note {
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,59 @@
+/**
+ * Styling tippy js dropdowns with DOM structure:
+
+<div data-tippy-root>
+  <div class="tippy-box" data-placement="top">
+    <div class="tippy-content">
+      My content
+    </div>
+  </div>
+</div>
+
+ Note that the default tippy styling is for tooltips; for dropdowns we use the
+ "dropdown" theme scope
+ */
+
+.tippy-box[data-theme=dropdown] {
+    .tippy-content {
+        @extend .label-link;
+        @include font-mono(600);
+        background: var(--interactive);
+        color: var(--background);
+        border-radius: $border-radius;
+        padding: 0;
+
+        &:hover {
+            @include font-mono(600);
+        }
+
+        ul {
+            @extend .plain-list;
+            height: auto;
+            overflow-y: scroll;
+            padding: 0;
+            max-height: 35vh;
+            padding: 10px 18px 7px 18px;
+
+            li {
+                cursor: pointer;
+                display: block;
+                padding: 3px 0;
+                line-height: 2.5;
+
+                &.selected {
+                    text-decoration: none;
+                }
+
+                &:hover {
+                    @include font-mono(750);
+                    text-decoration: underline;
+                }
+            }
+
+        }
+    }
+
+    .tippy-arrow {
+        display: none;
+    }
+}

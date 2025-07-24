@@ -1,0 +1,30 @@
+$size: 12px;
+
+@keyframes loading-pulsate {
+    0% {
+        opacity: 0;
+    }
+    25% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+    }
+}
+
+.loading {
+
+    &:before {
+        content: " ";
+        display: block;
+        position: absolute;
+        left: 10px;
+        top: 10px;
+        width: $size;
+        height: $size;
+        transform: translate(-50%, -50%);
+        animation: normal loading-pulsate 2s infinite;
+        background: var(--interactive);
+        border-radius: 100%;
+    }
+}
