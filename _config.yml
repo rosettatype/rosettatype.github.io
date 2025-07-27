@@ -19,7 +19,7 @@ theme: minima
 
 # Sass compiling
 sass:
-  sass_dir: assets/css
+  sass_dir: assets
   style: compressed
 
 # Articles showed on homepage
