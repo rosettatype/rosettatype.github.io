@@ -15,6 +15,8 @@ author:
 # Build settings
 markdown: kramdown
 
+theme: minima
+
 # Sass compiling
 sass:
   sass_dir: assets/css
@@ -40,9 +42,3 @@ articles:
   - title: Yrsa & Rasa
     link: https://github.com/rosettatype/yrsa-rasa
     description: Latin & Gujarati type families with 5 weights
-  # - title: repos
-  #   link: https://github.com/rosettatype/repos
-  #   description: Quick and dirty Python script to track multiple Git repositories and easily fetch updates
-  # - title: post-production scripts
-  #   link: https://github.com/rosettatype/post-production-scripts
-  #   description: Publicly available command-line tools used for post-production of Rosetta fonts
