@@ -1,10 +1,19 @@
 ---
 ---
+
+// Load the dark/light themes
 @import "themes";
+
+// The overall design system
 @import "rosetta-ds/rosetta-ds";
+
+// Most coming bits and pieces
 @import "shared/_shared";
+
+// And the nav structure
 @import "nav";
 
+// And then a few little specifics to this gh page
 
 .divider {
   width: 100%;
@@ -28,6 +37,7 @@ h2 {
 footer {
   margin-top: 144px;
 }
+
 footer::before {
   content: " ";
   clear: both;
