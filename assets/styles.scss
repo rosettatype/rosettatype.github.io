@@ -24,11 +24,14 @@
 
 section {
   margin-top: 6rem;
-  width: calc(100% / 24 * 12);
 }
 
 h2 {
   margin-bottom: 0rem;
+}
+
+p {
+  width: calc(100% / 24 * 12);
 }
 
 .button {
